@@ -8,8 +8,8 @@ Testar aqui nesse Repositorio
 
 4.(ver se tem uma extensao para o vs code para deixar isso mais facil)
 
-5 anotaçoes de Markdown
+5 anotaçoes de Markdown(Feito)
 
 6 anotaçao de quais comando do git usar eo que eles fazem
 
-7 como funciiona pasta no github
+7 como funciiona pasta no github(Feito)
