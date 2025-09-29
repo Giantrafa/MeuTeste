@@ -1,15 +1,7 @@
 Testar aqui nesse Repositorio
 
-1 Criar um arquivo
+1 Criar um arquivo usando git 
 
-2 modificar tarefagabriel
-
-3 fazer um branch
+2 modificar arquivo
 
 4.(ver se tem uma extensao para o vs code para deixar isso mais facil)
-
-5 anotaçoes de Markdown (Feito)
-
-6 anotaçao de quais comando do git usar eo que eles fazem (Feito)
-
-7 como funciiona pasta no github (Feito)
