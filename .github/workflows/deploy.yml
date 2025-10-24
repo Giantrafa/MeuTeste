@@ -8,15 +8,12 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    steps:
-      # 1. Checkout do código
+    steps:      
       - uses: actions/checkout@v3
-
-      # 2. Deploy no Render
+      
       - name: Deploy to Render
         run: curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK }}
-
-      # 3. Atualizar README.md
+      
       - name: Atualizar README após deploy
         run: |
           # Substituir ou adicionar linha de último deploy
