@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="wrap">
+        <header>
+            <h1>To-Do List</h1>
+            <p>Gerencie suas tarefas de forma simples e prática.</p>
+        </header>
+
+        <main>
+            <section id="todo" class="card" aria-labelledby="todo-title">
+                <h2 id="todo-title">Minhas Tarefas</h2>
+
+                <form id="todoForm" aria-describedby="todo-help" novalidate>
+                    <label for="taskInput">Nova Tarefa</label>
+                    <input type="text" id="taskInput" name="task" placeholder="Digite uma tarefa" autocomplete="off"
+                        required>
+                    <div class="actions">
+                        <button type="submit">Adicionar</button>
+                    </div>
+                    <p id="todo-help" class="visually-hidden">Digite a tarefa e pressione Adicionar</p>
+                </form>
+
+                <ul id="taskList" aria-live="polite"></ul>
+            </section>
+        </main>        
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
