@@ -15,19 +15,19 @@ jobs:
         run: curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK }}
       
       - name: Atualizar README após deploy
-        run: |
-          # Substituir ou adicionar linha de último deploy
+        run:
+          
           if grep -q "^Último deploy:" README.md; then
             sed -i "s/^Último deploy:.*/Último deploy: $(date '+%d/%m/%Y %H:%M') ✅ Sucesso/" README.md
           else
             echo -e "\nÚltimo deploy: $(date '+%d/%m/%Y %H:%M') ✅ Sucesso" >> README.md
           fi
 
-          # Configurar git
+          
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add README.md
           git commit -m "Atualizando README após deploy [skip ci]" || echo "Nada para commitar"
 
-          # Push usando GITHUB_TOKEN para evitar 403
+          
           git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} HEAD:main
