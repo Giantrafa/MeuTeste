@@ -1,145 +1,154 @@
 :root {
-    --bg: #f7f7f9;
-    --card: #fff;
-    --accent: #0366d6;
-    --text: #111;
-    --muted: #666;
-    --radius: 10px;
+  --bg: #f7f7f9;
+  --card: #fff;
+  --accent: #0366d6;
+  --text: #111;
+  --muted: #666;
+  --radius: 10px;
 }
 
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
-    margin: 0;
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    background: var(--bg);
-    color: var(--text);
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: var(--bg);
+  color: var(--text);
 }
 
+/* Layout principal */
 .wrap {
-    max-width: 900px;
-    margin: 32px auto;
-    padding: 20px;
-    background: var(--card);
-    border-radius: var(--radius);
-    box-shadow: 0 6px 18px rgba(0, 0, 0, .06);
+  max-width: 900px;
+  margin: 32px auto;
+  padding: 20px;
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
 }
 
+/* Cabeçalho */
 header h1 {
-    margin: 0 0 8px;
-    font-size: 1.6rem;
+  margin: 0 0 8px;
+  font-size: 1.6rem;
 }
 
 header p {
-    margin: 6px 0 14px;
-    color: var(--muted);
+  margin: 6px 0 14px;
+  color: var(--muted);
 }
 
+/* Grid */
 .grid {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
+/* Cartões */
 .card {
-    padding: 12px;
-    border-radius: 8px;
-    background: #fafafa;
-    border: 1px solid #eee;
+  padding: 12px;
+  border-radius: 8px;
+  background: #fafafa;
+  border: 1px solid #eee;
 }
 
+/* Formulário */
 form#todoForm {
-    display: grid;
-    gap: 8px;
-    margin-top: 8px;
+  display: grid;
+  gap: 8px;
+  margin-top: 8px;
 }
 
 form#todoForm label {
-    font-weight: 600;
-    font-size: .95rem;
+  font-weight: 600;
+  font-size: 0.95rem;
 }
 
 #taskInput {
-    width: 100%;
-    padding: 8px;
-    margin-top: 6px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    font-size: 1rem;
-    outline: none;
-    background: white;
-    color: var(--text);
+  width: 100%;
+  padding: 8px;
+  margin-top: 6px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  outline: none;
+  background: white;
+  color: var(--text);
 }
 
 #taskInput:focus {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 4px rgba(3, 102, 214, 0.08);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(3, 102, 214, 0.08);
 }
 
+/* Botões */
 .actions {
-    margin-top: 6px;
+  margin-top: 6px;
 }
 
 .actions button {
-    background: var(--accent);
-    color: white;
-    border: 0;
-    padding: 8px 12px;
-    border-radius: 6px;
-    cursor: pointer;
+  background: var(--accent);
+  color: #fff;
+  border: 0;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
+/* Lista de tarefas */
 #taskList {
-    margin-top: 12px;
-    padding: 0;
-    list-style: none;
+  margin-top: 12px;
+  padding: 0;
+  list-style: none;
 }
 
 #taskList li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px;
-    margin-top: 6px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    background: #fafafa;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  margin-top: 6px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: #fafafa;
 }
 
 #taskList li .taskText {
-    word-break: break-word;
-    margin-right: 8px;
+  margin-right: 8px;
+  word-break: break-word;
 }
 
 #taskList li button {
-    background: #ff4d4d;
-    color: white;
-    border: 0;
-    padding: 4px 8px;
-    border-radius: 4px;
-    cursor: pointer;
+  background: #ff4d4d;
+  color: #fff;
+  border: 0;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
+/* Rodapé */
 footer {
-    margin-top: 16px;
-    font-size: .9rem;
-    color: var(--muted);
+  margin-top: 16px;
+  font-size: 0.9rem;
+  color: var(--muted);
 }
 
+/* Acessibilidade */
 .visually-hidden {
-    position: absolute !important;
-    height: 1px;
-    width: 1px;
-    overflow: hidden;
-    clip: rect(1px, 1px, 1px, 1px);
-    white-space: nowrap;
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap;
 }
 
-/* Responsive */
+/* Responsivo */
 @media (max-width: 520px) {
-    .grid {
-        flex-direction: column;
-    }
+  .grid {
+    flex-direction: column;
+  }
 }

@@ -1,8 +1,0 @@
-{
-  "name": "meuteste",
-  "version": "1.0.0",
-  "private": true,
-  "scripts": {
-    "test": "echo \"No tests specified\" && exit 0"
-  }
-}
