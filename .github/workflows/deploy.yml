@@ -8,22 +8,23 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    steps:      
+
+    steps:
       - uses: actions/checkout@v3
-      
+
       - name: Deploy to Render
         run: curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK }}
-      
-      - name: Atualizar README após deploy
-  run: |
-    if grep -q "^Último deploy:" README.md; then
-      sed -i "s|^Último deploy:.*|Último deploy: $(date '+%d/%m/%Y %H:%M') ✅ Sucesso|" README.md
-    else
-      echo -e "\nÚltimo deploy: $(date '+%d/%m/%Y %H:%M') ✅ Sucesso" >> README.md
-    fi
 
-    git config user.name "github-actions[bot]"
-    git config user.email "github-actions[bot]@users.noreply.github.com"
-    git add README.md
-    git commit -m "Atualizando README após deploy [skip ci]" || echo "Nada para commitar"
-    git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} HEAD:main
+      - name: Atualizar README após deploy
+        run: |
+          if grep -q "^Último deploy:" README.md; then
+            sed -i "s|^Último deploy:.*|Último deploy: $(date '+%d/%m/%Y %H:%M') ✅ Sucesso|" README.md
+          else
+            echo -e "\nÚltimo deploy: $(date '+%d/%m/%Y %H:%M') ✅ Sucesso" >> README.md
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git commit -m "Atualizando README após deploy [skip ci]" || echo "Nada para commitar"
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} HEAD:main
