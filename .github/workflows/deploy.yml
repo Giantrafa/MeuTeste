@@ -31,4 +31,6 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add README.md
           git commit -m "Atualizando README após deploy [skip ci]" || echo "Nada para commitar"
-          git push
+
+          # Push usando GITHUB_TOKEN para evitar 403
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} HEAD:main
