@@ -18,7 +18,7 @@ body {
   color: var(--text);
 }
 
-/* Layout principal */
+
 .wrap {
   max-width: 900px;
   margin: 32px auto;
@@ -28,7 +28,7 @@ body {
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
 }
 
-/* Cabeçalho */
+
 header h1 {
   margin: 0 0 8px;
   font-size: 1.6rem;
@@ -39,14 +39,14 @@ header p {
   color: var(--muted);
 }
 
-/* Grid */
+
 .grid {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
 }
 
-/* Cartões */
+
 .card {
   padding: 12px;
   border-radius: 8px;
@@ -54,7 +54,7 @@ header p {
   border: 1px solid #eee;
 }
 
-/* Formulário */
+
 form#todoForm {
   display: grid;
   gap: 8px;
@@ -83,7 +83,7 @@ form#todoForm label {
   box-shadow: 0 0 0 4px rgba(3, 102, 214, 0.08);
 }
 
-/* Botões */
+
 .actions {
   margin-top: 6px;
 }
@@ -97,7 +97,7 @@ form#todoForm label {
   cursor: pointer;
 }
 
-/* Lista de tarefas */
+
 #taskList {
   margin-top: 12px;
   padding: 0;
@@ -129,14 +129,14 @@ form#todoForm label {
   cursor: pointer;
 }
 
-/* Rodapé */
+
 footer {
   margin-top: 16px;
   font-size: 0.9rem;
   color: var(--muted);
 }
 
-/* Acessibilidade */
+
 .visually-hidden {
   position: absolute !important;
   height: 1px;
@@ -146,7 +146,7 @@ footer {
   white-space: nowrap;
 }
 
-/* Responsivo */
+
 @media (max-width: 520px) {
   .grid {
     flex-direction: column;
