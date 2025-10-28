@@ -1,4 +1,4 @@
-const API_URL = 'https://hallowed-spirit-5gr6vxgxg4qjfv74r-10000.app.github.dev/';
+const API_URL = 'https://meuteste-fo9h.onrender.com';
 
 // ---------- SELETORES ----------
 const authSection = document.getElementById('auth');
