@@ -3,26 +3,55 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>To-Do List</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <div class="wrap">
+        <!-- Cabeçalho -->
         <header>
             <h1>To-Do List</h1>
             <p>Gerencie suas tarefas de forma simples e prática.</p>
         </header>
 
-        <main>
+        <!-- Seção de Autenticação (Login/Cadastro) -->
+        <section id="auth" class="card">
+            <h2>Login</h2>
+            <form id="loginForm" novalidate>
+                <label for="email">Email</label>
+                <input type="email" id="email" required placeholder="Digite seu email">
+
+                <label for="senha">Senha</label>
+                <input type="password" id="senha" required placeholder="Digite sua senha">
+
+                <button type="submit">Entrar</button>
+            </form>
+
+            <p>Não tem conta? 
+                <span id="showRegister" style="cursor:pointer; color:var(--accent)">Cadastre-se</span>
+            </p>
+
+            <form id="registerForm" style="display:none" novalidate>
+                <label for="regEmail">Email</label>
+                <input type="email" id="regEmail" required placeholder="Digite seu email">
+
+                <label for="regSenha">Senha</label>
+                <input type="password" id="regSenha" required placeholder="Digite sua senha">
+
+                <button type="submit">Cadastrar</button>
+            </form>
+        </section>
+
+        <!-- Seção de To-Do List (oculta até login) -->
+        <main id="todoSection" style="display:none">
             <section id="todo" class="card" aria-labelledby="todo-title">
                 <h2 id="todo-title">Minhas Tarefas</h2>
 
                 <form id="todoForm" aria-describedby="todo-help" novalidate>
                     <label for="taskInput">Nova Tarefa</label>
-                    <input type="text" id="taskInput" name="task" placeholder="Digite uma tarefa" autocomplete="off"
-                        required>
+                    <input type="text" id="taskInput" name="task" placeholder="Digite uma tarefa" autocomplete="off" required>
                     <div class="actions">
                         <button type="submit">Adicionar</button>
                     </div>

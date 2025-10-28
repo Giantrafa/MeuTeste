@@ -5,8 +5,10 @@
   --text: #111;
   --muted: #666;
   --radius: 10px;
+  --danger: #ff4d4d;
 }
 
+/* ======== Reset e base ======== */
 * {
   box-sizing: border-box;
 }
@@ -18,7 +20,7 @@ body {
   color: var(--text);
 }
 
-
+/* ======== Estrutura geral ======== */
 .wrap {
   max-width: 900px;
   margin: 32px auto;
@@ -28,10 +30,9 @@ body {
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
 }
 
-
 header h1 {
   margin: 0 0 8px;
-  font-size: 1.6rem;
+  font-size: 1.8rem;
 }
 
 header p {
@@ -39,37 +40,30 @@ header p {
   color: var(--muted);
 }
 
-
-.grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-
+/* ======== Cards ======== */
 .card {
-  padding: 12px;
+  padding: 16px;
   border-radius: 8px;
   background: #fafafa;
   border: 1px solid #eee;
+  margin-top: 16px;
 }
 
-
-form#todoForm {
+/* ======== Formulários ======== */
+form {
   display: grid;
   gap: 8px;
   margin-top: 8px;
 }
 
-form#todoForm label {
+label {
   font-weight: 600;
   font-size: 0.95rem;
 }
 
-#taskInput {
+input {
   width: 100%;
   padding: 8px;
-  margin-top: 6px;
   border: 1px solid #ddd;
   border-radius: 6px;
   font-size: 1rem;
@@ -78,26 +72,35 @@ form#todoForm label {
   color: var(--text);
 }
 
-#taskInput:focus {
+input:focus {
   border-color: var(--accent);
-  box-shadow: 0 0 0 4px rgba(3, 102, 214, 0.08);
+  box-shadow: 0 0 0 3px rgba(3, 102, 214, 0.15);
 }
 
-
-.actions {
-  margin-top: 6px;
-}
-
-.actions button {
+/* ======== Botões ======== */
+button {
   background: var(--accent);
   color: #fff;
   border: 0;
   padding: 8px 12px;
   border-radius: 6px;
   cursor: pointer;
+  transition: background 0.2s ease;
 }
 
+button:hover {
+  background: #024ca2;
+}
 
+button.danger {
+  background: var(--danger);
+}
+
+button.danger:hover {
+  background: #e03e3e;
+}
+
+/* ======== Lista de Tarefas ======== */
 #taskList {
   margin-top: 12px;
   padding: 0;
@@ -113,30 +116,52 @@ form#todoForm label {
   border: 1px solid #ddd;
   border-radius: 6px;
   background: #fafafa;
+  transition: background 0.2s ease;
 }
 
-#taskList li .taskText {
+#taskList li:hover {
+  background: #f1f1f1;
+}
+
+.taskText {
+  flex: 1;
   margin-right: 8px;
   word-break: break-word;
 }
 
-#taskList li button {
-  background: #ff4d4d;
-  color: #fff;
-  border: 0;
-  padding: 4px 8px;
-  border-radius: 4px;
-  cursor: pointer;
+/* ======== Seção de Autenticação ======== */
+#auth form {
+  display: grid;
+  gap: 8px;
+  margin-top: 8px;
 }
 
+#auth p {
+  margin-top: 8px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
 
+#auth p span {
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--accent);
+}
+
+#auth p span:hover {
+  text-decoration: underline;
+}
+
+/* ======== Rodapé ======== */
 footer {
-  margin-top: 16px;
+  margin-top: 20px;
   font-size: 0.9rem;
   color: var(--muted);
+  text-align: center;
 }
 
-
+/* ======== Acessibilidade ======== */
 .visually-hidden {
   position: absolute !important;
   height: 1px;
@@ -146,9 +171,14 @@ footer {
   white-space: nowrap;
 }
 
-
+/* ======== Responsividade ======== */
 @media (max-width: 520px) {
-  .grid {
-    flex-direction: column;
+  .wrap {
+    margin: 16px;
+    padding: 16px;
+  }
+
+  header h1 {
+    font-size: 1.4rem;
   }
 }
