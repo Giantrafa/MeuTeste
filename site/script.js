@@ -6,6 +6,9 @@ const todoSection = document.getElementById('todoSection');
 const loginForm = document.getElementById('loginForm');
 const registerForm = document.getElementById('registerForm');
 const showRegister = document.getElementById('showRegister');
+const taskList = document.getElementById('taskList');
+const todoForm = document.getElementById('todoForm');
+const taskInput = document.getElementById('taskInput');
 
 // ---------- TROCA DE TELA ----------
 showRegister.addEventListener('click', () => {
@@ -18,51 +21,64 @@ showRegister.addEventListener('click', () => {
 
 // ---------- AUTENTICAÇÃO ----------
 async function login(email, senha) {
-    const res = await fetch(`${API_URL}/login`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, senha })
-    });
+    try {
+        const res = await fetch(`${API_URL}/login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, senha })
+        });
+        const data = await res.json();
 
-    const data = await res.json();
-
-    if (res.ok) {
-        localStorage.setItem('token', data.token);
-        mostrarTodo();
-    } else {
-        alert(data.erro || 'Erro ao fazer login');
+        if (res.ok) {
+            // Salva o token no localStorage
+            localStorage.setItem('token', data.token);
+            mostrarTodo();
+        } else {
+            alert(data.erro || 'Erro ao fazer login');
+        }
+    } catch (err) {
+        console.error(err);
+        alert('Erro de conexão com a API.');
     }
 }
 
 async function register(email, senha) {
-    const res = await fetch(`${API_URL}/register`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, senha })
-    });
+    try {
+        const res = await fetch(`${API_URL}/register`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, senha })
+        });
+        const data = await res.json();
 
-    const data = await res.json();
-
-    if (res.ok) {
-        alert('Cadastro realizado! Agora você pode fazer login.');
-        loginForm.style.display = 'grid';
-        registerForm.style.display = 'none';
-        showRegister.textContent = 'Cadastre-se';
-        document.querySelector('#auth h2').textContent = 'Login';
-    } else {
-        alert(data.erro || 'Erro ao cadastrar');
+        if (res.ok) {
+            alert('Cadastro realizado! Agora você pode fazer login.');
+            loginForm.style.display = 'grid';
+            registerForm.style.display = 'none';
+            showRegister.textContent = 'Cadastre-se';
+            document.querySelector('#auth h2').textContent = 'Login';
+        } else {
+            alert(data.erro || 'Erro ao cadastrar');
+        }
+    } catch (err) {
+        console.error(err);
+        alert('Erro de conexão com a API.');
     }
 }
 
 // ---------- TAREFAS ----------
 async function loadTasks() {
-    const taskList = document.getElementById('taskList');
     taskList.innerHTML = '';
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+        logout();
+        return;
+    }
 
     try {
-        const token = localStorage.getItem('token');
         const res = await fetch(`${API_URL}/todos`, {
-            headers: { 'Authorization': token }
+            headers: { 'Authorization': `Bearer ${token}` } // Ajuste do header com Bearer
         });
 
         if (!res.ok) throw new Error('Token inválido ou expirado');
@@ -81,64 +97,78 @@ async function loadTasks() {
                 taskList.appendChild(listItem);
             });
         }
-    } catch (error) {
-        console.error('Erro ao carregar tarefas:', error);
-        alert('Sessão expirada. Faça login novamente.');
+    } catch (err) {
+        console.error(err);
+        alert('Sessão expirada ou erro ao carregar tarefas.');
         logout();
     }
 }
 
 async function addTaskToAPI(taskText) {
     const token = localStorage.getItem('token');
-    const res = await fetch(`${API_URL}/todos`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': token
-        },
-        body: JSON.stringify({ text: taskText })
-    });
+    if (!token) return;
 
-    if (!res.ok) throw new Error('Erro ao adicionar tarefa');
-    return await res.json();
+    try {
+        const res = await fetch(`${API_URL}/todos`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}` // Ajuste do header
+            },
+            body: JSON.stringify({ text: taskText })
+        });
+
+        if (!res.ok) throw new Error('Erro ao adicionar tarefa');
+        return await res.json();
+    } catch (err) {
+        console.error(err);
+        alert('Erro ao adicionar tarefa.');
+    }
 }
 
 async function deleteTaskFromAPI(taskId) {
     const token = localStorage.getItem('token');
-    await fetch(`${API_URL}/todos/${taskId}`, {
-        method: 'DELETE',
-        headers: { 'Authorization': token }
-    });
+    if (!token) return;
+
+    try {
+        const res = await fetch(`${API_URL}/todos/${taskId}`, {
+            method: 'DELETE',
+            headers: { 'Authorization': `Bearer ${token}` } // Ajuste do header
+        });
+
+        if (!res.ok) throw new Error('Erro ao deletar tarefa');
+    } catch (err) {
+        console.error(err);
+        alert('Erro ao deletar tarefa.');
+    }
 }
 
 // ---------- EVENTOS ----------
-loginForm.addEventListener('submit', async (e) => {
+loginForm.addEventListener('submit', async e => {
     e.preventDefault();
     const email = document.getElementById('email').value.trim();
     const senha = document.getElementById('senha').value.trim();
     if (email && senha) await login(email, senha);
 });
 
-registerForm.addEventListener('submit', async (e) => {
+registerForm.addEventListener('submit', async e => {
     e.preventDefault();
     const email = document.getElementById('regEmail').value.trim();
     const senha = document.getElementById('regSenha').value.trim();
     if (email && senha) await register(email, senha);
 });
 
-document.getElementById('todoForm').addEventListener('submit', async (e) => {
+todoForm.addEventListener('submit', async e => {
     e.preventDefault();
-    const taskInput = document.getElementById('taskInput');
-    const taskText = taskInput.value.trim();
-
-    if (taskText) {
-        await addTaskToAPI(taskText);
+    const taskTextValue = taskInput.value.trim();
+    if (taskTextValue) {
+        await addTaskToAPI(taskTextValue);
         taskInput.value = '';
         loadTasks();
     }
 });
 
-document.getElementById('taskList').addEventListener('click', async (e) => {
+taskList.addEventListener('click', async e => {
     if (e.target.classList.contains('deleteTask')) {
         const taskId = e.target.dataset.id;
         await deleteTaskFromAPI(taskId);
